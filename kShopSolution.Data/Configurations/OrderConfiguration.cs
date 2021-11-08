@@ -1,11 +1,11 @@
-﻿using qShopSolution.Data.Entities;
+﻿using kShopSolution.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace qShopSolution.Data.Configurations
+namespace kShopSolution.Data.Configurations
 {
     public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {

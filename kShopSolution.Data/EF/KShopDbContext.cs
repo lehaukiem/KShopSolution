@@ -1,22 +1,24 @@
-﻿using qShopSolution.Data.Entities;
+﻿
+using kShopSolution.Data.Configurations;
+using kShopSolution.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using qShopSolution.Data.Configurations;
 
-namespace qShopSolution.Data.EF
+
+namespace kShopSolution.Data.EF
 {
-    public class QShopDbContext : DbContext/*: IdentityDbContext<AppUser, AppRole, Guid>*/
+    public class KShopDbContext : DbContext/*: IdentityDbContext<AppUser, AppRole, Guid>*/
     {
-        public QShopDbContext(DbContextOptions options) : base(options)
+        public KShopDbContext(DbContextOptions options) : base(options)
         {
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Configure using Fluent API
-            //modelBuilder.ApplyConfiguration(new CartConfiguration());
+            modelBuilder.ApplyConfiguration(new CartConfiguration());
 
             modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
@@ -25,12 +27,12 @@ namespace qShopSolution.Data.EF
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
 
             modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
-            //modelBuilder.ApplyConfiguration(new CategoryTranslationConfiguration());
-            //modelBuilder.ApplyConfiguration(new ContactConfiguration());
-            //modelBuilder.ApplyConfiguration(new LanguageConfiguration());
-            //modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
-            //modelBuilder.ApplyConfiguration(new PromotionConfiguration());
-            //modelBuilder.ApplyConfiguration(new TransactionConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryTranslationConfiguration());
+            modelBuilder.ApplyConfiguration(new ContactConfiguration());
+            modelBuilder.ApplyConfiguration(new LanguageConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductTranslationConfiguration());
+            modelBuilder.ApplyConfiguration(new PromotionConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionConfiguration());
 
             //modelBuilder.ApplyConfiguration(new AppUserConfiguration());
             //modelBuilder.ApplyConfiguration(new AppRoleConfiguration());
@@ -50,7 +52,7 @@ namespace qShopSolution.Data.EF
 
             //modelBuilder.Seed();
 
-            base.OnModelCreating(modelBuilder);
+            //base.OnModelCreating(modelBuilder);
         }
 
 

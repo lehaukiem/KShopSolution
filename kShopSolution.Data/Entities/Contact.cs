@@ -1,9 +1,9 @@
-﻿using qShopSolution.Data.Enums;
+﻿using kShopSolution.Data.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace qShopSolution.Data.Entities
+namespace kShopSolution.Data.Entities
 {
     public class Contact
     {

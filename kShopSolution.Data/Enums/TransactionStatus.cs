@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace qShopSolution.Data.Enums
+namespace kShopSolution.Data.Enums
 {
     public enum TransactionStatus
     {
