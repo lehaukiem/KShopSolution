@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
-
+using qShopSolution.Data.Configurations;
 
 namespace qShopSolution.Data.EF
 {
@@ -18,13 +18,13 @@ namespace qShopSolution.Data.EF
             //Configure using Fluent API
             //modelBuilder.ApplyConfiguration(new CartConfiguration());
 
-            //modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
-            //modelBuilder.ApplyConfiguration(new ProductConfiguration());
-            //modelBuilder.ApplyConfiguration(new CategoryConfiguration());
-            //modelBuilder.ApplyConfiguration(new ProductInCategoryConfiguration());
-            //modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new AppConfigConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductInCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
 
-            //modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderDetailConfiguration());
             //modelBuilder.ApplyConfiguration(new CategoryTranslationConfiguration());
             //modelBuilder.ApplyConfiguration(new ContactConfiguration());
             //modelBuilder.ApplyConfiguration(new LanguageConfiguration());
@@ -62,7 +62,7 @@ namespace qShopSolution.Data.EF
         public DbSet<Cart> Carts { get; set; }
 
         public DbSet<CategoryTranslation> CategoryTranslations { get; set; }
-        //public DbSet<ProductInCategory> ProductInCategories { get; set; }
+        public DbSet<ProductInCategory> ProductInCategories { get; set; }
 
         public DbSet<Contact> Contacts { get; set; }
 
