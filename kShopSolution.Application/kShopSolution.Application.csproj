@@ -4,4 +4,9 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\kShopSolution.Data\kShopSolution.Data.csproj" />
+    <ProjectReference Include="..\kShopSolution.Entities\kShopSolution.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
