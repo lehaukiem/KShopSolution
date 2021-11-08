@@ -3,6 +3,7 @@ using kShopSolution.Application.Catalog.Products.Dtos.Manage;
 using kShopSolution.Application.Dtos;
 using kShopSolution.Data.EF;
 using kShopSolution.Data.Entities;
+using kShopSolution.Utilities.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -56,17 +57,11 @@ namespace kShopSolution.Application.Catalog.Products
         public async Task<int> Delete(int productId)
         {
             var product = await _context.Products.FindAsync(productId);
-            if (product == null) throw new QShopException($"Cannot find a product:{productId}");
+            if (product == null) throw new KShopException($"Cannot find a product:{productId}");
 
             _context.Products.Remove(product);
             return await _context.SaveChangesAsync();
         }
-
-        public async Task<List<ProductViewModel>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
 
 
         public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
@@ -76,7 +71,7 @@ namespace kShopSolution.Application.Catalog.Products
                         join pic in _context.ProductInCategories on p.Id equals pic.ProductId
                         join c in _context.Categories on pic.CategoryId equals c.Id
                         where pt.Name.Contains(request.Keyword)
-                        select new {p,pt,pic};
+                        select new { p, pt, pic };
             if (!string.IsNullOrEmpty(request.Keyword))
                 query = query.Where(x => x.pt.Name.Contains(request.Keyword));
 
@@ -87,9 +82,9 @@ namespace kShopSolution.Application.Catalog.Products
             //3 Paging
             int totalRow = await query.CountAsync();
 
-            var data = await query.Skip((request.PageIndex -1)*request.PageSize)
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
-                .Select(x=> new ProductViewModel()
+                .Select(x => new ProductViewModel()
                 {
                     Id = x.p.Id,
                     Name = x.pt.Name,
@@ -117,17 +112,38 @@ namespace kShopSolution.Application.Catalog.Products
 
         public async Task<int> Update(ProductUpdateRequest request)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products.FindAsync(request.Id);
+            var productTranslations = await _context.ProductTranslations.FirstOrDefaultAsync(x => x.ProductId == request.Id
+                 && x.LanguageId == request.LanguageId);
+            if (product == null || productTranslations == null) throw new KShopException($"Cannot find a product with id:{request.Id}");
+
+            productTranslations.Name = request.Name;
+            productTranslations.SeoAlias = request.SeoAlias;
+            productTranslations.SeoDescription = request.SeoDescription;
+            productTranslations.SeoTitle = request.SeoTitle;
+            productTranslations.Description = request.Description;
+            productTranslations.Details = request.Details;
+
+            return await _context.SaveChangesAsync();
+
         }
 
-        public Task<bool> UpdatePrice(int ProductId, decimal newPrice)
+        public async Task<bool> UpdatePrice(int productId, decimal newPrice)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null ) throw new KShopException($"Cannot find a product with id:{productId}");
+            product.Price = newPrice;
+
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public Task<bool> UpdateStock(int ProductId, int addedQuantity)
+        public async Task<bool> UpdateStock(int productId, int addedQuantity)
         {
-            throw new NotImplementedException();
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null) throw new KShopException($"Cannot find a product with id:{productId}");
+            product.Stock += addedQuantity;
+
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
