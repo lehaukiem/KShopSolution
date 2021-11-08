@@ -1,4 +1,5 @@
 ﻿
+using eShopSolution.Data.Extensions;
 using kShopSolution.Data.Configurations;
 using kShopSolution.Data.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +51,7 @@ namespace kShopSolution.Data.EF
 
             //Data seeding
 
-            //modelBuilder.Seed();
+            modelBuilder.Seed();
 
             //base.OnModelCreating(modelBuilder);
         }
