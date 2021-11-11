@@ -1,7 +1,11 @@
-﻿using kShopSolution.Application.Catalog.Products.Dtos;
-using kShopSolution.Application.Catalog.Products.Dtos.Manage;
-using kShopSolution.Application.Dtos;
+﻿using kShopSolution.ViewModels.Catalog.Products;
+using kShopSolution.ViewModels.Catalog.Products.Manage;
+using kShopSolution.ViewModels.Catalog.Products.Public;
+using kShopSolution.ViewModels.Common;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using GetProductPagingRequest = kShopSolution.ViewModels.Catalog.Products.Manage.GetProductPagingRequest;
 
 namespace kShopSolution.Application.Catalog.Products
 {
@@ -18,5 +22,11 @@ namespace kShopSolution.Application.Catalog.Products
         Task AddViewcount(int productId);
 
         Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request);
+
+        Task<int> AddImages(int productId, List<IFormFile> files);
+        Task<int> RemoveImages(int imageId);
+        Task<int> UpdateImages(int imageId, string caption, bool isDefault);
+
+        Task<List<ProductImageViewModel>> GetListImage(int productId);
     }
 }

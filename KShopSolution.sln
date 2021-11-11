@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kShopSolution.WebApp", "kShopSolution.WebApp\kShopSolution.WebApp.csproj", "{AFF1953A-3373-4CE5-9A29-074602D75DFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kShopSolution.WebApp", "kShopSolution.WebApp\kShopSolution.WebApp.csproj", "{AFF1953A-3373-4CE5-9A29-074602D75DFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kShopSolution.Data", "kShopSolution.Data\kShopSolution.Data.csproj", "{099F389E-EF81-4FAB-A8C7-BD46B8FF970D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kShopSolution.Data", "kShopSolution.Data\kShopSolution.Data.csproj", "{099F389E-EF81-4FAB-A8C7-BD46B8FF970D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kShopSolution.Entities", "kShopSolution.Entities\kShopSolution.Entities.csproj", "{F41C9054-F448-4003-AF42-AA95C894FF9A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kShopSolution.Entities", "kShopSolution.Entities\kShopSolution.Entities.csproj", "{F41C9054-F448-4003-AF42-AA95C894FF9A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kShopSolution.Application", "kShopSolution.Application\kShopSolution.Application.csproj", "{EFDC838F-B790-40DE-A8EC-F5C76CCD9362}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kShopSolution.Application", "kShopSolution.Application\kShopSolution.Application.csproj", "{EFDC838F-B790-40DE-A8EC-F5C76CCD9362}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "kShopSolution.ViewModels", "kShopSolution.ViewModels\kShopSolution.ViewModels.csproj", "{56EFA8E6-26B0-4739-8040-BE9AE374AA10}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{EFDC838F-B790-40DE-A8EC-F5C76CCD9362}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFDC838F-B790-40DE-A8EC-F5C76CCD9362}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFDC838F-B790-40DE-A8EC-F5C76CCD9362}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56EFA8E6-26B0-4739-8040-BE9AE374AA10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56EFA8E6-26B0-4739-8040-BE9AE374AA10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56EFA8E6-26B0-4739-8040-BE9AE374AA10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56EFA8E6-26B0-4739-8040-BE9AE374AA10}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

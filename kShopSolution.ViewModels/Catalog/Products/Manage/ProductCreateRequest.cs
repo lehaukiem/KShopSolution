@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Http;
 
-namespace kShopSolution.Application.Catalog.Products.Dtos.Manage
+namespace kShopSolution.ViewModels.Catalog.Products.Manage
 {
     public class ProductCreateRequest
     {
@@ -17,5 +15,7 @@ namespace kShopSolution.Application.Catalog.Products.Dtos.Manage
 
         public string SeoAlias { get; set; }
         public string LanguageId { set; get; }
+
+        public IFormFile ThumbnailImageơ { get; set; }
     }
 }

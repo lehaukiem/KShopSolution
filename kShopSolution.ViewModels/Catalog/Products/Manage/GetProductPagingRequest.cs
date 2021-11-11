@@ -1,9 +1,7 @@
-﻿using kShopSolution.Application.Dtos;
-using System;
+﻿using kShopSolution.ViewModels.Common;
 using System.Collections.Generic;
-using System.Text;
 
-namespace kShopSolution.Application.Catalog.Products.Dtos.Manage
+namespace kShopSolution.ViewModels.Catalog.Products.Manage
 {
     public class GetProductPagingRequest : PagingRequestBase
     {

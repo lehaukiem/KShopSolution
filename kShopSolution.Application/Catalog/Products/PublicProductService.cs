@@ -1,10 +1,10 @@
-﻿using kShopSolution.Application.Catalog.Products.Dtos;
-using kShopSolution.Application.Dtos;
-using kShopSolution.Data.EF;
-using System;
+﻿using kShopSolution.Data.EF;
 using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using kShopSolution.ViewModels.Common;
+using kShopSolution.ViewModels.Catalog.Products.Public;
+using kShopSolution.ViewModels.Catalog.Products;
 
 namespace kShopSolution.Application.Catalog.Products
 {
@@ -15,7 +15,7 @@ namespace kShopSolution.Application.Catalog.Products
         {
             _context = context;
         }
-        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(Dtos.Public.GetProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetProductPagingRequest request)
         {
             var query = from p in _context.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId

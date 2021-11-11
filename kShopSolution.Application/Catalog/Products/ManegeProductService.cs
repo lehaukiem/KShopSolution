@@ -1,23 +1,37 @@
-﻿using kShopSolution.Application.Catalog.Products.Dtos;
-using kShopSolution.Application.Catalog.Products.Dtos.Manage;
-using kShopSolution.Application.Dtos;
+﻿using kShopSolution.Application.Common;
 using kShopSolution.Data.EF;
 using kShopSolution.Data.Entities;
 using kShopSolution.Utilities.Exceptions;
+using kShopSolution.ViewModels.Catalog.Products;
+using kShopSolution.ViewModels.Catalog.Products.Manage;
+using kShopSolution.ViewModels.Catalog.Products.Public;
+using kShopSolution.ViewModels.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using GetProductPagingRequest = kShopSolution.ViewModels.Catalog.Products.Manage.GetProductPagingRequest;
 
 namespace kShopSolution.Application.Catalog.Products
 {
     public class ManegeProductService : IManegeProductService
     {
         private readonly KShopDbContext _context;
-        public ManegeProductService(KShopDbContext context)
+        private readonly IStorageService _storageService;
+
+        public ManegeProductService(KShopDbContext context, IStorageService storageService)
         {
             _context = context;
+            _storageService = storageService;
+        }
+
+        public Task<int> AddImages(int productId, List<IFormFile> files)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task AddViewcount(int productId)
@@ -50,6 +64,22 @@ namespace kShopSolution.Application.Catalog.Products
                     }
                 }
             };
+            //save image
+            if(request.ThumbnailImageơ != null)
+            {
+                product.ProductImages = new List<ProductImage>()
+                {
+                    new ProductImage()
+                    {
+                        Caption = "thumbnail image",
+                        DateCreated = DateTime.Now,
+                        FileSize = request.ThumbnailImageơ.Length,
+                        ImagePath = await this.SaveFile(request.ThumbnailImageơ),
+                        IsDefault = true,
+                        SortOrder = 1
+                    }
+                };
+            }
             _context.Products.Add(product);
             return await _context.SaveChangesAsync();
         }
@@ -59,7 +89,15 @@ namespace kShopSolution.Application.Catalog.Products
             var product = await _context.Products.FindAsync(productId);
             if (product == null) throw new KShopException($"Cannot find a product:{productId}");
 
+            var images =  _context.ProductImages.Where(i =>  i.ProductId == productId);
+            foreach(var image in images)
+            {
+                await _storageService.DeleteFileAsync(image.ImagePath);
+            }
+
             _context.Products.Remove(product);
+           
+            
             return await _context.SaveChangesAsync();
         }
 
@@ -110,6 +148,17 @@ namespace kShopSolution.Application.Catalog.Products
             return pagedResult;
         }
 
+
+        public Task<List<ProductImageViewModel>> GetListImage(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> RemoveImages(int imageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<int> Update(ProductUpdateRequest request)
         {
             var product = await _context.Products.FindAsync(request.Id);
@@ -124,8 +173,25 @@ namespace kShopSolution.Application.Catalog.Products
             productTranslations.Description = request.Description;
             productTranslations.Details = request.Details;
 
+            //save image
+            if (request.ThumbnailImageơ != null)
+            {
+                var thumbnailImage =await _context.ProductImages.FirstOrDefaultAsync(i => i.IsDefault == true && i.ProductId == request.Id);
+                if(thumbnailImage != null)
+                {
+                    thumbnailImage.FileSize = request.ThumbnailImageơ.Length;
+                    thumbnailImage.ImagePath = await this.SaveFile(request.ThumbnailImageơ);
+                    _context.ProductImages.Update(thumbnailImage);
+                }
+            }
+
             return await _context.SaveChangesAsync();
 
+        }
+
+        public Task<int> UpdateImages(int imageId, string caption, bool isDefault)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<bool> UpdatePrice(int productId, decimal newPrice)
@@ -144,6 +210,13 @@ namespace kShopSolution.Application.Catalog.Products
             product.Stock += addedQuantity;
 
             return await _context.SaveChangesAsync() > 0;
+        }
+        private async Task<String> SaveFile(IFormFile file)
+        {
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim();
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+            await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
+            return fileName;
         }
     }
 }

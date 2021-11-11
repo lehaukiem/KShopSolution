@@ -1,12 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\kShopSolution.Data\kShopSolution.Data.csproj" />
     <ProjectReference Include="..\kShopSolution.Entities\kShopSolution.Entities.csproj" />
+    <ProjectReference Include="..\kShopSolution.ViewModels\kShopSolution.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

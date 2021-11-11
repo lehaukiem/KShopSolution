@@ -1,9 +1,6 @@
-﻿using kShopSolution.Application.Catalog.Products.Dtos;
-using kShopSolution.Application.Catalog.Products.Dtos.Public;
-using kShopSolution.Application.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using kShopSolution.ViewModels.Catalog.Products;
+using kShopSolution.ViewModels.Catalog.Products.Public;
+using kShopSolution.ViewModels.Common;
 using System.Threading.Tasks;
 
 namespace kShopSolution.Application.Catalog.Products

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using kShopSolution.Data.EF;
 
 namespace kShopSolution.Data.Migrations
 {
     [DbContext(typeof(KShopDbContext))]
-    partial class KShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211111072612_ChangfileLengthtype")]
+    partial class ChangfileLengthtype
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
